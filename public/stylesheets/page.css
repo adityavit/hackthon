@@ -17,3 +17,15 @@
 .newsSection{
 	border : 1px solid;
 }
+
+.tabs > li{
+	width: 100px;
+}
+
+.section{
+	color : red;
+}
+
+.date{
+	color:green;
+}

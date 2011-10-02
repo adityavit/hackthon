@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 <div class="grid_12">
-	<div class="grid_6 prefix_3">
+	<div class="grid_9 prefix_3">
     <h1>New York Times News Aggregator</h1>
 	</div>
 </div>
@@ -18,10 +18,10 @@
 	 <div class="grid_4 spacer">
 	 #{/else}
         <div class="grid_4">
-            <div class="grid_2 alpha">
+            <div class="grid_2 alpha section">
                 ${nyModel.section}
             </div>
-            <div class="grid_2 omega ">
+            <div class="grid_2 omega date">
                 ${nyModel.publishedDate}
             </div>
         </div>
@@ -36,23 +36,27 @@
                 ${nyModel.postAbstract}
             </div>
         </div>
-		<div class="grid_4">
+		<div class="grid_4 tabs">
+			<ul class="tabs">
 			#{list nyModel.parselyObjects,as:'publisher'}
 			#{if publisher_index == 1}
-				<div class="grid_1 tableHeader tabSelected" id="tab${nyModel_index}${publisher_index}">
+				<li class="active"><a href="#tab${nyModel_index}${publisher_index}" class="grid_1">
 			#{/if}
 			#{else}
-				<div class="grid_1 tableHeader tabUnselected" id="tab${nyModel_index}${publisher_index}">
+				<li><a href="#tab${nyModel_index}${publisher_index}" class="grid_1">
 			#{/else}
 				${publisher.key}
-			</div>
+			</a></li>
 			#{/list}
+			</ul>
+			</div>
+			<div class="pill-content">
 			#{list nyModel.parselyObjects,as:'publisher'}
 			#{if publisher_index == 1}
-			<div class="grid_4 tabDivSelected" id="tabDiv${nyModel_index}${publisher_index}">
+			<div class="grid_4 active" id="tab${nyModel_index}${publisher_index}">
 			#{/if}
 		    #{else}
-			<div class="grid_4 tabDivUnSelected" id="tabDiv${nyModel_index}${publisher_index}">
+			<div class="grid_4 " id="tab${nyModel_index}${publisher_index}">
 			#{/else}
 			#{list publisher.value,as:'publisherObj'}
 				<div class="grid_4" >
