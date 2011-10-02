@@ -1,0 +1,19 @@
+.tableUnSelected{
+	display : none;
+}
+
+.tableSelected{
+	display:block;
+}
+
+.tableHeader{
+	cursor: pointer;
+	border : 1px solid;
+}
+.boxLayout{
+	border : 1px solid;
+}
+
+.newsSection{
+	border : 1px solid;
+}

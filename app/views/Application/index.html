@@ -8,7 +8,7 @@
 <div class="grid_12">
     #{list NytimesModel.nyTimesModelObjects, as:'nyModel'}
 	#{if nyModel_index%3 ==1}
-	<div class="grid_12">
+	<div class="grid_12 boxLayout">
     <div class="grid_4 spacer alpha">
     #{/if}
 	#{elseif nyModel_index%3==0}
@@ -36,19 +36,26 @@
                 ${nyModel.postAbstract}
             </div>
         </div>
-        <div class="grid_4">
-            #{list nyModel.tokens,as:'token'}
-            ${token}
-            #{/list}
-        </div>
 		<div class="grid_4">
 			#{list nyModel.parselyObjects,as:'publisher'}
-			<div class="grid_4 table">
-			<div class="grid_4 tableHeader">
+			#{if publisher_index == 1}
+				<div class="grid_1 tableHeader tabSelected" id="tab${nyModel_index}${publisher_index}">
+			#{/if}
+			#{else}
+				<div class="grid_1 tableHeader tabUnselected" id="tab${nyModel_index}${publisher_index}">
+			#{/else}
 				${publisher.key}
 			</div>
+			#{/list}
+			#{list nyModel.parselyObjects,as:'publisher'}
+			#{if publisher_index == 1}
+			<div class="grid_4 tabDivSelected" id="tabDiv${nyModel_index}${publisher_index}">
+			#{/if}
+		    #{else}
+			<div class="grid_4 tabDivUnSelected" id="tabDiv${nyModel_index}${publisher_index}">
+			#{/else}
 			#{list publisher.value,as:'publisherObj'}
-				<div class="grid_4">
+				<div class="grid_4" >
 				#{if publisherObj.thumbUrl}
 				 <div class="grid_1 alpha">
 				 	<img src="${publisherObj.thumbUrl}" alt="" height="47" width="85"/>

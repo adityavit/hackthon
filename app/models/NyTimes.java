@@ -15,10 +15,6 @@ import com.google.gson.JsonParser;
 public class NyTimes {
 	private static String url = "http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=db76a9121152ad686b5d997b712c7400:6:64948807";
 	
-	private static String apiKey="";
-	
-	//private String responseData = null;
-	
 	private ArrayList<NyTimesModel> nyTimesModelObjects = new ArrayList<NyTimesModel>();
 	/**
 	 * Fetches the Json Data of the NyTimes.
