@@ -1,5 +1,7 @@
 package models;
 
+import helpers.ParselyExtractor;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -35,10 +37,12 @@ public class NyTimes {
 				   JsonArray jsonArr = responseJsonObj.get("results").getAsJsonArray();
 				   for(int i = 0 ; i< jsonArr.size();i++){
 					   NyTimesModel nyTimesModelObj = new NyTimesModel(jsonArr.get(i));
+					   nyTimesModelObj.setParselyObjects(new ParselyExtractor().fetchParselyData(nyTimesModelObj.getTokens()));
 					   nyTimesModelObjects.add(nyTimesModelObj);
 				   }
 			   }else{
 				   NyTimesModel nyTimesModelObj = new NyTimesModel(responseJsonObj);
+				   nyTimesModelObj.setParselyObjects(new ParselyExtractor().fetchParselyData(nyTimesModelObj.getTokens()));
 				   nyTimesModelObjects.add(nyTimesModelObj);
 			   }
 		   }
