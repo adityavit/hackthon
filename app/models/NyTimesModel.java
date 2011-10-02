@@ -5,6 +5,7 @@ package models;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import helpers.TokenGenerator;
 
 /**
  * @author Aditya
@@ -22,6 +23,7 @@ public class NyTimesModel {
 	
 	private String postAbstract = null;
 	
+	private String[] tokens = null;
 	
 	public NyTimesModel(JsonElement responseObject){
 		JsonObject resultObj = responseObject.getAsJsonObject();
@@ -30,7 +32,19 @@ public class NyTimesModel {
 		title = resultObj.get("title").getAsString();
 		postAbstract = resultObj.get("abstract").getAsString();
 		publishedDate = resultObj.get("published_date").getAsString();
-		
+		try{
+		TokenGenerator tg = new TokenGenerator();
+		tokens = tg.getTokens(postAbstract);
+		}catch(Exception e){
+			System.out.println("Exception Caught");
+		}
+	}
+
+	/**
+	 * @return the tokens
+	 */
+	public String[] getTokens() {
+		return tokens;
 	}
 
 	/**

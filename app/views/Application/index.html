@@ -9,6 +9,11 @@
 	<li>${nyModel.section}</li>
     <li>${nyModel.title}</li>
 	<li>${nyModel.publishedDate}</li>
-	<li>${nyModel.postAbstract}</li>	
+	<li>${nyModel.postAbstract}</li>
+	<ul>
+		#{list nyModel.tokens,as:'token'}
+		<li>${token}</li>
+		#{/list}
+	</ul>	
  #{/list}
 </ul>

@@ -24,7 +24,6 @@ public class NyTimes {
 	 */
 	public void fetchNyTimesData(){
 		JsonElement jse = null;
-		//url = url + apiKey;
 		try{
 		   URL source = new URL(url);
 		   BufferedReader in = new BufferedReader(new InputStreamReader(source.openStream(), "UTF-8"));
@@ -43,14 +42,8 @@ public class NyTimes {
 				   nyTimesModelObjects.add(nyTimesModelObj);
 			   }
 		   }
-
-		   /*System.out.println(responseJsonArr.size());
-		   for(int i = 0;i<responseJsonArr.size();i++){
-			   
-			   nyTimesModelObjects.add(new NyTimesModel(responseJsonArr.get(i)));	
-		   }*/
 		}catch(Exception e){
-			System.out.println("Exception thrown "+e);
+			System.out.println("NyTimes Exception thrown "+e+"url="+url);
 		}
 	}
 	
