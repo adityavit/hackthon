@@ -3,8 +3,11 @@ package models;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class NyTimes {
@@ -12,7 +15,9 @@ public class NyTimes {
 	
 	private static String apiKey="";
 	
-	private String responseData = null;
+	//private String responseData = null;
+	
+	private ArrayList<NyTimesModel> nyTimesModelObjects = new ArrayList<NyTimesModel>();
 	/**
 	 * Fetches the Json Data of the NyTimes.
 	 * @return
@@ -25,13 +30,32 @@ public class NyTimes {
 		   BufferedReader in = new BufferedReader(new InputStreamReader(source.openStream(), "UTF-8"));
 		   jse = new JsonParser().parse(in);
 		   in.close();
+		   JsonObject responseJsonObj = jse.getAsJsonObject();
+		   if(responseJsonObj.get("status").getAsString().equalsIgnoreCase("OK")){
+			   if(responseJsonObj.get("results").isJsonArray()){
+				   JsonArray jsonArr = responseJsonObj.get("results").getAsJsonArray();
+				   for(int i = 0 ; i< jsonArr.size();i++){
+					   NyTimesModel nyTimesModelObj = new NyTimesModel(jsonArr.get(i));
+					   nyTimesModelObjects.add(nyTimesModelObj);
+				   }
+			   }else{
+				   NyTimesModel nyTimesModelObj = new NyTimesModel(responseJsonObj);
+				   nyTimesModelObjects.add(nyTimesModelObj);
+			   }
+		   }
+
+		   /*System.out.println(responseJsonArr.size());
+		   for(int i = 0;i<responseJsonArr.size();i++){
+			   
+			   nyTimesModelObjects.add(new NyTimesModel(responseJsonArr.get(i)));	
+		   }*/
 		}catch(Exception e){
 			System.out.println("Exception thrown "+e);
 		}
-		responseData = jse.toString();
 	}
 	
-	public String getResponseData(){
-		return responseData;
+	public ArrayList<NyTimesModel> getNyTimesModelObjects(){
+		return nyTimesModelObjects;
 	}
+	
 }

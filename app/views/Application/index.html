@@ -2,5 +2,13 @@
 #{set title:'Home' /}
 
 <h1> Hackthon APP</h1>
-
- ${NytimesModel.responseData}
+<ul>
+ #{list NytimesModel.nyTimesModelObjects, as:'nyModel'}
+ 	<li>${nyModel_index}</li>
+    <li>${nyModel.recordUrl}</li>
+	<li>${nyModel.section}</li>
+    <li>${nyModel.title}</li>
+	<li>${nyModel.publishedDate}</li>
+	<li>${nyModel.postAbstract}</li>	
+ #{/list}
+</ul>
